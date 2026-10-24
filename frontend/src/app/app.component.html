@@ -1,0 +1,27 @@
+<main>
+  <h1>To-Do List</h1>
+
+  <form (ngSubmit)="addTodo()">
+    <input
+      type="text"
+      name="todoText"
+      [(ngModel)]="newTodoText"
+      aria-label="New to-do item"
+    >
+    <button type="submit" [disabled]="isAdding || !newTodoText.trim()">Add</button>
+  </form>
+
+  @if (errorMessage) {
+    <p class="error" role="alert">{{ errorMessage }}</p>
+  }
+
+  @if (isLoading) {
+    <p>Loading to-do items...</p>
+  }
+
+  <ul>
+    @for (todo of todos; track todo._id) {
+      <li>{{ todo.text }}</li>
+    }
+  </ul>
+</main>
